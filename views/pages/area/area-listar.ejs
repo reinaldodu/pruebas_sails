@@ -1,0 +1,140 @@
+<h1 class="text-center text-secondary">Lista de Areas</h1>
+<div>
+    <button class="btn btn-primary m-2" onClick="crearArea('/area/crear');"><i class="bi bi-plus-circle"></i> Crear Area</button>
+</div>
+
+<div class="row m-0">
+    <% areas.forEach(area => { %>
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">        
+        <div class="card bg-light border-info">
+            <div class="card-header">
+                <h5 class="card-title"><%=area.nombre%></h5>
+                <button type="button" class="btn btn-primary btn-sm" onClick="crearAsignatura('<%=area.nombre%>', '/asignatura/crear/<%=area.id%>');"><i class="bi bi-plus-square"></i></button>
+                <button type="button" class="btn btn-success btn-sm" onClick="editArea('<%=area.nombre%>', '<%=area.descripcion%>', '/area/actualizar/<%=area.id%>');"><i class="bi bi-pencil-square"></i></button>
+                <% if (area.asignaturas.length===0) { %>
+                   <button type="button" class="btn btn-danger btn-sm" onClick="deleteArea('<%=area.nombre%>','/area/eliminar/<%=area.id%>');"><i class="bi bi-trash"></i></button>
+                <% }%>
+            </div>
+            <div class="card-body">
+                <i class="card-text ml-2"><%=area.descripcion%></i>
+            </div>
+            <ul class="list-group list-group-flush">
+            <% area.asignaturas.forEach( asignatura => { %>
+            <li class="list-group-item"><%=asignatura.nombre%><a href="#" role="button"><i class="bi bi-pencil-square"></i></a><a href="#" role="button"><i class="bi bi-trash"></i></a></li>
+            <% }) %>
+            </ul>            
+        </div>        
+    </div>
+    <% }) %>
+</div>
+
+<script>
+
+function crearArea(ruta) {
+    swal.fire({
+        title: 'Crear Area',
+        html:   '<form name="creararea" action='+ ruta + ' method="post">' +
+        '<div class="form-group">' +
+          '<label for="nombre">Nombre</label>' +
+          '<input type="text" class="form-control" id="nombre" name="nombre" required>' +
+        '</div>'+
+        '<div class="form-group">'+
+          '<label for="descripcion">Descripción</label>'+
+          '<input type="text" class="form-control" id="descripcion" name="descripcion">'+          
+        '</div></form>',
+        showCancelButton: true,
+        confirmButtonText: 'Crear Area',
+        allowOutsideClick: false,
+        preConfirm: () => {
+            const nombre = Swal.getPopup().querySelector('#nombre').value            
+            if (!nombre) {
+                Swal.showValidationMessage(`Por favor ingrese el nombre`)
+            }            
+        }    
+    })
+    .then((result) => {
+    if (result.isConfirmed) {
+       //Se envia el formulario
+       document.creararea.submit();        
+    } 
+    });
+}
+
+function editArea(area, descripcion, ruta) {
+    swal.fire({
+        title: 'Actualizar area '+area,
+        html:   '<form name="actualizararea" action='+ ruta + ' method="post">' +
+        '<div class="form-group">' +
+          '<label for="nombre">Nombre</label>' +
+          '<input type="text" class="form-control" id="nombre" name="nombre" value="' + area + '" required>' +
+        '</div>'+
+        '<div class="form-group">'+
+          '<label for="descripcion">Descripción</label>'+
+          '<input type="text" class="form-control" id="descripcion" name="descripcion" value="' + descripcion + '">'+
+        '</div></form>',
+        showCancelButton: true,
+        confirmButtonText: 'Actualizar área',
+        allowOutsideClick: false,
+        preConfirm: () => {
+            const nombre = Swal.getPopup().querySelector('#nombre').value            
+            if (!nombre) {
+                Swal.showValidationMessage(`Por favor ingrese el nombre`)
+            }            
+        }
+    })
+    .then((result) => {
+    if (result.isConfirmed) {
+       //Se envia el formulario
+       document.actualizararea.submit();        
+    } 
+    });  
+}
+
+function deleteArea(area, ruta) {    
+    swal.fire({
+        title: "Está seguro?",
+        text: "Desea eliminar el área " + area + "?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: 'Si, eliminar área!',
+        allowOutsideClick: false,
+        })
+    .then((result) => {
+    if (result.isConfirmed) {
+       //Se llama la ruta para eliminar el área
+        window.location= ruta;        
+    } 
+    });    
+}
+
+
+function crearAsignatura(areaNombre, ruta) {
+    swal.fire({
+        title: 'Crear asignatura para el area de '+areaNombre,
+        html:   '<form name="crearasignatura" action='+ ruta + ' method="post">' +
+        '<div class="form-group">' +
+          '<label for="nombre">Nombre</label>' +
+          '<input type="text" class="form-control" id="nombre" name="nombre" required>' +
+        '</div>'+
+        '<div class="form-group">'+
+          '<label for="descripcion">Descripción</label>'+
+          '<input type="text" class="form-control" id="descripcion" name="descripcion">'+          
+        '</div></form>',
+        showCancelButton: true,
+        confirmButtonText: 'Crear Asignatura',
+        allowOutsideClick: false,
+        preConfirm: () => {
+            const nombre = Swal.getPopup().querySelector('#nombre').value            
+            if (!nombre) {
+                Swal.showValidationMessage(`Por favor ingrese el nombre`)
+            }            
+        }
+    })
+    .then((result) => {
+    if (result.isConfirmed) {
+       //Se envia el formulario
+       document.crearasignatura.submit();        
+    } 
+    });
+}
+</script>

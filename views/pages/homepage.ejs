@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormBuilder</title>
+</head>
+<body>
+  <h1 class="text-primary text-center">Form Builder</h1>
+  <div id="fb-editor"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
+  <script>
+  jQuery(function($) {
+    var fbTemplate = document.getElementById('fb-editor');
+    var options = {
+      controlPosition: 'left'
+    };
+    $(fbTemplate).formBuilder(options);
+    //$(document.getElementById('fb-editor')).formBuilder();
+  });
+  </script>
+</body>
+</html>
