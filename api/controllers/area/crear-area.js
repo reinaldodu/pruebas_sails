@@ -31,9 +31,9 @@ module.exports = {
       nombre:inputs.nombre,
       descripcion:inputs.descripcion
     })
-    .intercept((err)=>{      
+    .intercept((err)=>{
       err.message = 'Error al guardar el área: '+err.message;
-      return err;
+      return ({error:err.message});
     });
     return exits.success('/area');
   }

@@ -21,6 +21,7 @@ module.exports = {
     documento: {
       type: 'string',
       required: true,
+      unique: true,
     },
     tipo_documento: {
       type: 'string',
@@ -50,6 +51,7 @@ module.exports = {
     },
     email: {
       type: 'string',
+      unique: true,
     },
     foto: {
       type: 'string',
@@ -78,10 +80,6 @@ module.exports = {
     nacimientoMunicipio: {
       model: 'municipio',
       columnName: 'mpo_nacimiento_id'
-    },
-    fichaMedica: {
-      model: 'ficha_medica',
-      columnName: 'ficha_medica_id'
     },
     grado: {
       model: 'grado',

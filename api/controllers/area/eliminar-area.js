@@ -9,17 +9,12 @@ module.exports = {
 
   inputs: {
     areaId: {
-      description: 'The ID of the area to look up.',
-      // By declaring a numeric example, Sails will automatically respond with `res.badRequest`
-      // if the `areaId` parameter is not a number.
+      description: 'Id del área a eliminar',
       type: 'number',
-      // By making the `areaId` parameter required, Sails will automatically respond with
-      // `res.badRequest` if it's left out.
       required: true
     }
 
   },
-
 
   exits: {
     success: {
@@ -27,33 +22,24 @@ module.exports = {
     },
     invalid: {
       statusCode: 500,
-      description: 'No se puede eliminar el área si tiene asignaturas' // this will not go in response
+      description: 'No es posible eliminar el área'
+    },
+    noFound: {
+      statusCode: 404,
+      description: 'No existe Id del área'
     }
   },
 
-
-  fn: async function (inputs,exits) {   
-    
-    let identificador=inputs.areaId;
-    
-    let tieneAsignaturas = await Asignatura.find({area:inputs.areaId});
-    console.log(tieneAsignaturas);
-    if (tieneAsignaturas.length===0) {
-      let deleteArea = await Area.destroyOne({id:inputs.areaId});
-      
-      if (deleteArea) {
-        sails.log(`Se eliminó el área con ID ${identificador}`);
-      }
-      else {
-        sails.log('Esta área no existe');
-      } 
-      error=false;
-      return exits.success('/area',error);
+  fn: async function (inputs,exits) {
+    let area = await Area.destroyOne({id:inputs.areaId})
+    //Interceptar error de adaptador de BD
+    .intercept({name:'AdapterError'}, (err)=> {
+      return exits.invalid({error:err.message});
+    });
+    //Error si no existe el Id del área
+    if (!area){
+      return exits.noFound({error:'Id de área no existe'});
     }
-    else {
-      error =true;
-      return exits.invalid(error);
-    }
+    return exits.success('/area');
   }
-
 };

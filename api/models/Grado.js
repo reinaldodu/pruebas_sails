@@ -12,9 +12,8 @@ module.exports = {
       type: 'string',
       required: true,
     },
-
     descripcion: {
-      type: 'string'
+      type: 'string',
     },
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗

@@ -23,12 +23,22 @@ module.exports.routes = {
   'GET /paises': { action: 'view-paises'},
 
   //RUTAS AREA
-  'GET /area':                        {action: 'area/listar-areas'},
+  'GET /area':                        {action: 'area/consultar-areas'},
   'POST /area/crear':                 {action: 'area/crear-area'},
   'GET /area/editar/:areaId':         {action: 'area/editar-area'},
   'POST /area/actualizar/:areaId':    {action: 'area/actualizar-area'},
   'GET /area/eliminar/:areaId':       {action: 'area/eliminar-area'},
   'POST /asignatura/crear/:areaId':   {action: 'asignatura/crear-asignatura'},
+  'GET /asignatura/eliminar/:asignaturaId': {action: 'asignatura/eliminar-asignatura'},
+
+  // RUTAS ESTUDIANTE
+  'GET /estudiante':                            {action: 'estudiante/consultar-estudiantes'},
+  'GET /estudiante/crear':                      {action: 'estudiante/crear-estudiante'},
+  'POST /estudiante/crear':                     {action: 'estudiante/procesar-nuevo-estudiante'},
+  'POST /estudiante/actualizar/:estudianteId':  {action: 'estudiante/actualizar-estudiante'},
+
+  // RUTAS MUNICIPIOS
+  'GET /municipio/:departamentoId':   {action: 'municipio/consultar-municipios'},
 
   // RUTAS API
   //**************/

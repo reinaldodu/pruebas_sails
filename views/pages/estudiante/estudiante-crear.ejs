@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="shadow-lg p-3 m-5 mt-4 bg-body rounded">
+        <div class="p-3 mb-2 bg-primary bg-gradient fw-bold text-white">Agregar Estudiante</div>
+        <form action="/estudiante/crear" method="post" class="needs-validation" novalidate>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label for="nombres" class="form-label">Nombres</label>
+              <input type="text" class="form-control" id="nombres" required>
+              <div class="invalid-feedback">
+                Escriba los nombres
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="apellidos" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="apellidos" required>
+              <div class="invalid-feedback">
+                Escriba los apellidos
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="tipoDocumento" class="form-label">Tipo Documento</label>
+              <select name="tipoDocumento" id="tipoDocumento" class="form-select" required>
+                <option selected disabled value="">Seleccione...</option>
+                <option value="RC">Registro Civil</option>
+                <option value="TI">Tarjeta de identidad</option>
+                <option value="CC">Cédula de ciudadania</option>
+              </select>
+              <div class="invalid-feedback">
+                Seleccione el tipo de documento
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="grado" class="form-label">Grado</label>
+              <select name="grado" id="grado" class="form-select" required>
+                <option selected disabled value="">Seleccione el grado...</option>
+                <% grados.forEach(grado => { %>
+                  <option value="<%=grado.id%>"><%=grado.nombre%></option>
+                <% }) %>
+              </select>
+              <div class="invalid-feedback">
+                Seleccione el grado
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="departamento" class="form-label">Departamento</label>              
+              <select name="departamento" id="departamento" class="form-select" required>
+                <option selected disabled value="">Seleccione el Departamento...</option>
+                <% departamentos.forEach(departamento => { %>
+                  <option value="<%=departamento.id%>"><%=departamento.nombre%></option>
+                <% }) %>
+              </select>
+              <div class="invalid-feedback">
+                Seleccione el departamento
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="municipio" class="form-label">Municipio</label>
+              <select name="municipio" id="municipio" class="form-select" required>
+                <option selected disabled value="">Seleccione el Municipio...</option>                
+                
+              </select>
+              <div class="invalid-feedback">
+                Seleccione el municipio
+              </div>
+            </div>
+
+          </div>
+          
+          <div class="col-12 mt-4 text-center">
+            <button class="btn btn-success" type="submit">Guardar Estudiante</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+  //Selects dependientes Departamento-Municipios
+  $(function(){
+	var fillSecondary = function(){
+	var selected = $('#departamento').val();
+    if (selected) {
+      $('#municipio').empty();
+      $.getJSON("/municipio/"+selected,null,function(data){
+        console.log(data);
+        data.municipios.forEach(function(municipio,index){
+            $('#municipio').append('<option value="'+municipio.id+'">'+municipio.nombre+'</option>');
+        });
+      });
+    }
+	}
+	$('#departamento').change(fillSecondary);
+	fillSecondary();
+  });
+</script>
+
+
+<script>
+// Script Bootstrap de validación del formulario
+  (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
