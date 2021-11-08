@@ -5,77 +5,74 @@
         <div class="p-3 mb-2 bg-primary bg-gradient fw-bold text-white">Agregar Estudiante</div>
         <form action="/estudiante/crear" method="post" class="needs-validation" novalidate>
           <div class="row g-2">
-            <div class="col-md-6">
+
+            <div class="form-floating col-md-6">              
+              <input type="text" class="form-control" id="nombres" placeholder="Nombres" required>
               <label for="nombres" class="form-label">Nombres</label>
-              <input type="text" class="form-control" id="nombres" required>
               <div class="invalid-feedback">
                 Escriba los nombres
               </div>
             </div>
-            <div class="col-md-6">
+            <div class=" form-floating col-md-6">              
+              <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" required>
               <label for="apellidos" class="form-label">Apellidos</label>
-              <input type="text" class="form-control" id="apellidos" required>
               <div class="invalid-feedback">
                 Escriba los apellidos
               </div>
             </div>
 
-            <div class="col-md-6">
-              <label for="fnacimiento" class="form-label">Fecha de nacimiento</label>
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-calendar-check"></i></span>
-                <input type="date" class="form-control" id="fnacimiento" min="1900-01-01" max="2090-01-01" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required>              
-              </div>
-              <div class="invalid-feedback">
-                Seleccione una fecha de nacimiento
-              </div>
+            <div class="form-floating col-md-6">
+                <input type="date" class="form-control" id="fnacimiento" min="1900-01-01" max="2090-01-01" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" placeholder="Fecha nacimiento" required>              
+                <label for="fnacimiento" class="form-label">Fecha de nacimiento</label>
+                <div class="invalid-feedback">
+                  Seleccione una fecha de nacimiento
+                </div>              
             </div>
             
-            <div class="col-md-4">
-              <label for="tipoDocumento" class="form-label">Tipo Documento</label>
-              <select name="tipoDocumento" id="tipoDocumento" class="form-select" required>
+            <div class="form-floating col-md-4">
+              <select name="tipoDocumento" id="tipoDocumento" class="form-select" aria-label="Tipo documento" required>
                 <option selected disabled value="">Seleccione...</option>
                 <option value="RC">Registro Civil</option>
                 <option value="TI">Tarjeta de identidad</option>
                 <option value="CC">Cédula de ciudadania</option>
               </select>
+              <label for="tipoDocumento" class="form-label">Tipo Documento</label>
               <div class="invalid-feedback">
                 Seleccione el tipo de documento
               </div>
             </div>
 
-            <div class="col-md-4">
-              <label for="grado" class="form-label">Grado</label>
-              <select name="grado" id="grado" class="form-select" required>
+            <div class="form-floating col-md-4">
+              <select name="grado" id="grado" class="form-select" aria-label="Grado" required>
                 <option selected disabled value="">Seleccione el grado...</option>
                 <% grados.forEach(grado => { %>
                   <option value="<%=grado.id%>"><%=grado.nombre%></option>
                 <% }) %>
               </select>
+              <label for="grado" class="form-label">Grado</label>
               <div class="invalid-feedback">
                 Seleccione el grado
               </div>
             </div>
             
-            <div class="col-md-4">
-              <label for="departamento" class="form-label">Departamento</label>              
-              <select name="departamento" id="departamento" class="form-select" required>
+            <div class="form-floating col-md-4">
+              <select name="departamento" id="departamento" class="form-select" aria-label="Departamento" required>
                 <option selected disabled value="">Seleccione el Departamento...</option>
                 <% departamentos.forEach(departamento => { %>
                   <option value="<%=departamento.id%>"><%=departamento.nombre%></option>
                 <% }) %>
               </select>
+              <label for="departamento" class="form-label">Departamento</label>
               <div class="invalid-feedback">
                 Seleccione el departamento
               </div>
             </div>
 
-            <div class="col-md-4">
-              <label for="municipio" class="form-label">Municipio</label>
-              <select name="municipio" id="municipio" class="form-select" required>
+            <div class="form-floating col-md-4">              
+              <select name="municipio" id="municipio" class="form-select" aria-label="Municipip" required>
                 <option selected disabled value="">Seleccione el Municipio...</option>                
-                
               </select>
+              <label for="municipio" class="form-label">Municipio</label>
               <div class="invalid-feedback">
                 Seleccione el municipio
               </div>

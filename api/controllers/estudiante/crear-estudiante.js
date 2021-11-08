@@ -29,7 +29,7 @@ module.exports = {
       err.message = 'Error al consultar los departamentos: '+err.message;
       return ({error:err.message});
     });
-    //Consultar Paises    
+    //Consultar Paises
     let paises= await Pais.find()
     .intercept((err)=>{
       err.message = 'Error al consultar los paises: '+err.message;
