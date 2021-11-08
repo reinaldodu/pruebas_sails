@@ -22,7 +22,10 @@
 
             <div class="col-md-6">
               <label for="fnacimiento" class="form-label">Fecha de nacimiento</label>
-              <input type="date" class="form-control" id="fnacimiento" min="1900-01-01" max="2090-01-01" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-calendar-check"></i></span>
+                <input type="date" class="form-control" id="fnacimiento" min="1900-01-01" max="2090-01-01" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required>              
+              </div>
               <div class="invalid-feedback">
                 Seleccione una fecha de nacimiento
               </div>
