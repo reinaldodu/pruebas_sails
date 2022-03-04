@@ -1,4 +1,4 @@
-# edulogros-web
+# edulogros-web V.0.1
 
 a [Sails v1](https://sailsjs.com) application
 
